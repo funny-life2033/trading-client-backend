@@ -128,7 +128,6 @@ const emailValidate = async (req, res) => {
       validateRegex: true,
       validateMx: true,
       validateTypo: true,
-      validateDisposable: true,
     });
     console.log(email, valid);
     res.json({ valid });
