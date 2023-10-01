@@ -10,12 +10,16 @@ connectDB();
 const app = express();
 
 let corsOptions = {
-  origin: "*",
+  origin: (origin, callback) => {
+    console.log(origin);
+    callback(null, true);
+  },
   optionsSuccessStatus: 200,
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
 
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
 
