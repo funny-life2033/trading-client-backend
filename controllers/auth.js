@@ -123,10 +123,17 @@ const emailVerify = async (req, res) => {
 const emailValidate = async (req, res) => {
   const { email } = req.body;
   try {
-    const { valid } = await emailValidator.validate(email);
+    const { valid } = await emailValidator.validate({
+      email,
+      validateRegex: true,
+      validateMx: true,
+      validateTypo: true,
+      validateDisposable: true,
+    });
     console.log(email, valid);
     res.json({ valid });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "server error" });
   }
 };
